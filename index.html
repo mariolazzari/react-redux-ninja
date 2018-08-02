@@ -17,11 +17,33 @@
 <body>
     <div id="app"></div>
 
+    <button></button>
+
     <script type="text/babel">
         class App extends React.Component {
-            state = {
-                name: "Mario",
+            
+            constructor(props) {
+                super(props)
+                this.state = {
+                    name: "Mario",
                 age: 43
+                }
+                this.handleClick = this.handleClick.bind(this);
+                this.handleMouseOver = this.handleMouseOver.bind(this);                
+            }
+
+            handleClick(e) {
+                console.log(e.target);
+            }
+
+            handleMouseOver(e) {
+                console.log(e);
+                // this needs to be binded
+                console.log(this.state);
+            }
+
+            handleCopy(e) {
+                console.log('Text copied');
             }
 
             render() {
@@ -30,6 +52,9 @@
                         <h1>Ciao ciao</h1>
                         <p>{Math.random() * 10}</p>
                         <p>{`${this.state.name} is ${this.state.age} years old`}</p>
+                        <button onClick={this.handleClick}>Click me</button>
+                        <button onMouseOver={this.handleMouseOver}>Hover me</button>
+                        <p onCopy={this.handleCopy}>Text to copy</p>
                     </div>
 
                 )
