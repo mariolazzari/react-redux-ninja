@@ -42,8 +42,22 @@
                 console.log(this.state);
             }
 
+        
             handleCopy(e) {
                 console.log('Text copied');
+            }
+
+            handleChange = e => {
+                
+                this.setState({
+                    name: e.target.value
+                })
+            }
+
+            handleSubmit = e => {
+                e.preventDefault();
+                console.log("Form submitted", this.state.name)
+
             }
 
             render() {
@@ -53,8 +67,15 @@
                         <p>{Math.random() * 10}</p>
                         <p>{`${this.state.name} is ${this.state.age} years old`}</p>
                         <button onClick={this.handleClick}>Click me</button>
-                        <button onMouseOver={this.handleMouseOver}>Hover me</button>
-                        <p onCopy={this.handleCopy}>Text to copy</p>
+                        <button onMouseOver={this.handleMouseOver}>Hover me</button>                        
+                        <p onCopy={this.handleCopy}>Text to copy</p>            
+                        <form onSubmit={this.handleSubmit}>
+                            <h1> My name is {this.state.name}</h1>
+                            <input type="text" onChange={this.handleChange}/>
+                            <button>Submit</button>
+
+                        </form>
+
                     </div>
 
                 )
