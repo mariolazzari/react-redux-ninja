@@ -1,4 +1,5 @@
 import React from "react";
+import "./Ninja.css";
 
 const Ninjas = ({ ninjas, deleteNinja }) => {
   return (
