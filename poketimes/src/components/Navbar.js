@@ -1,7 +1,9 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, withRouter } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = props => {
+  console.log(props);
+
   return (
     <div>
       <nav className="nav-wrapper red darken-3">
@@ -24,4 +26,5 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+// withRoute => higher order function that applies router properties to current one (non included in route tag)
+export default withRouter(Navbar);
