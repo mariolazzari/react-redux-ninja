@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import axios from "axios";
+//import axios from "axios";
+import { connect } from "react-redux";
 
-export default class Post extends Component {
+class Post extends Component {
+  /*
   state = {
     post: null
   };
@@ -18,12 +20,23 @@ export default class Post extends Component {
       console.log(error);
     }
   }
+*/
+
+  handleClick = () => {
+    this.deletePost(this.props.post.id);
+  };
 
   render() {
-    const post = this.state.post ? (
+    //const post = this.state.post ? (
+    const post = this.props.post ? (
       <div className="post">
-        <h4 className="title">{this.state.post.title}</h4>
-        <p>{this.state.post.body}</p>
+        <h4 className="title">{this.props.post.title}</h4>
+        <p>{this.props.post.body}</p>
+        <div className="center">
+          <button className="btn grey" onClick={this.handleClick}>
+            Delete
+          </button>
+        </div>
       </div>
     ) : (
       <div className="center">Loading post...</div>
@@ -32,3 +45,26 @@ export default class Post extends Component {
     return <div className="container">{post}</div>;
   }
 }
+
+// redux map
+const mapStateToProps = (state, ownProps) => {
+  const id = ownProps.match.params.post_id;
+
+  return {
+    post: state.posts.find(post => post.id === id)
+  };
+};
+
+// redux dispatch
+const mapDispatchToProps = dispatch => {
+  return {
+    deletePost: id => {
+      dispatch({ type: "DELETE_POST", id: id });
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Post);
