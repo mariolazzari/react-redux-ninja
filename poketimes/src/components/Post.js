@@ -23,10 +23,14 @@ class Post extends Component {
 */
 
   handleClick = () => {
-    this.deletePost(this.props.post.id);
+    console.log(this.props.post);
+    this.props.deletePost(this.props.post.id);
+    this.props.history.push("/");
   };
 
   render() {
+    console.log(this.props);
+
     //const post = this.state.post ? (
     const post = this.props.post ? (
       <div className="post">

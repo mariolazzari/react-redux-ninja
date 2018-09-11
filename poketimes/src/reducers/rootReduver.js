@@ -9,7 +9,8 @@ const initState = {
     {
       id: "2",
       title: "Post 2",
-      body: -"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore hic harum autem quibusdam, similique quisquam, suscipit doloribus, ut dolore iste libero officia ea maxime ullam porro aut nam repudiandae consequuntur."
+      body:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore hic harum autem quibusdam, similique quisquam, suscipit doloribus, ut dolore iste libero officia ea maxime ullam porro aut nam repudiandae consequuntur."
     },
     {
       id: "3",
@@ -21,7 +22,13 @@ const initState = {
 };
 
 const rootReducer = (state = initState, action) => {
-  console.log(action);
+  if (action.type === "DELETE_POST") {
+    const newPosts = state.posts.filter(post => post.id !== action.id);
+    return {
+      ...state,
+      posts: newPosts
+    };
+  }
   return state;
 };
 
